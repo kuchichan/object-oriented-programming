@@ -48,6 +48,7 @@ set(SOURCE
     src/player.cpp
     src/ship.cpp
     src/store.cpp
+    src/game.cpp
 )
 include_directories(include)
 add_library(lib STATIC ${SOURCE})
