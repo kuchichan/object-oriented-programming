@@ -4,10 +4,13 @@
 
 class Game {
 public:
-    Game(size_t start_money, size_t game_days, size_t final_goal);
+    Game(size_t money, size_t gameDays, size_t finalGoal);
 
 private:
-    const size_t start_money_;
-    const size_t game_days_;
-    const size_t final_goal_;
+    size_t money_;
+    const size_t gameDays_;
+    const size_t finalGoal_;
+
+    bool checkWinCondition() const;
+    bool checkLoseCondition() const;
 };
