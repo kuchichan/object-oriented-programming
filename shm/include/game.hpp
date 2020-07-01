@@ -20,8 +20,8 @@ public:
     void startGame();
 
 private:
-    void checkWinCondition() const;
-    void checkLooseCondition() const;
+    bool checkWinCondition() const;
+    bool checkLoseCondition() const;
     void printMenu();
     void printOptions();
     void printWinScreen();
