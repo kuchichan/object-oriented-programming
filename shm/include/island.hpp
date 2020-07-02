@@ -1,6 +1,7 @@
 #pragma once
 
 #include "coordinates.hpp"
+#include "store.hpp"
 
 class Island {
 public:

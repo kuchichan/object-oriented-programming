@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "cargo.hpp"
-#include "time.hpp"
 
 class Ship : public Observer {
 public:
@@ -20,9 +19,8 @@ public:
          int speed,
          const std::string& name,
          size_t id,
-         Delegate* delegate,
-         Time* time);
-    Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time);
+         Delegate* delegate);
+    Ship(int maxCrew, int speed, size_t id, Delegate* delegate);
     // override from Observer
     ~Ship() override;
 
@@ -52,5 +50,4 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
-    Time* time_;
 };

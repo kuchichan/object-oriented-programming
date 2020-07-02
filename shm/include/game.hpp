@@ -34,7 +34,6 @@ private:
     size_t final_goal_;
     size_t current_day_ = 1;
     std::unique_ptr<Map> map_;
-    std::unique_ptr<Time> time_;
     std::unique_ptr<Player> player_;
     std::unique_ptr<Travel> travel_command_;
     std::unique_ptr<Buy> buy_command_;

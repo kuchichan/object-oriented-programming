@@ -1,31 +1,29 @@
 #include "ship.hpp"
+#include "locators.hpp"
 
 #include <algorithm>
 #include <iostream>
 
-Ship::Ship()
-    : id_(-1) {}
+Ship::Ship() : id_(-1) {}
 
 Ship::Ship(int capacity,
            int maxCrew,
            int speed,
            const std::string& name,
            size_t id,
-           Delegate* delegate,
-           Time* time)
+           Delegate* delegate)
     : delegate_(delegate),
       capacity_(capacity),
       maxCrew_(maxCrew),
       crew_(0),
       speed_(speed),
       name_(name),
-      id_(id),
-      time_(time) {
-    time_->addObserver(this);
+      id_(id) {
+  TimeServiceLocator::getTime()->addObserver(this);
 }
 
-Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time)
-    : Ship(0, maxCrew, speed, "", id, delegate, time) {}
+Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate)
+    : Ship(0, maxCrew, speed, "", id, delegate) {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
@@ -86,5 +84,5 @@ void Ship::nextDay() {
 }
 
 Ship::~Ship() {
-    time_->removeObserver(this);
+  TimeServiceLocator::getTime()->removeObserver(this);
 }
