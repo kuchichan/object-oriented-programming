@@ -42,5 +42,5 @@ bool Game::checkWinCondition() const {
 }
 
 bool Game::checkLoseCondition() const {
-    return money_ == 0 || current_day_ >= days_;
+    return money_ == 0 || (current_day_ >= days_ && money_ < final_goal_);
 }
