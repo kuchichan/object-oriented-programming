@@ -1,6 +1,5 @@
 #include "player.hpp"
 
-#include <limits>
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
     : ship_(std::move(ship)), money_(money), availableSpace_(availableSpace) {}
@@ -38,5 +37,5 @@ void Player::countAvailableSpace() {
 }
 
 void Player::payCrew(size_t money) {
-    (money_ < money) ? money_ = std::numeric_limits<size_t>::max() : money_ -= money;
+    (money_ < money) ? money_ = 0 : money_ -= money;
 }
