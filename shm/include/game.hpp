@@ -32,7 +32,7 @@ private:
     size_t money_;
     size_t days_;
     size_t final_goal_;
-    size_t current_day_;
+    size_t current_day_ = 1;
     std::unique_ptr<Map> map_;
     std::unique_ptr<Time> time_;
     std::unique_ptr<Player> player_;
