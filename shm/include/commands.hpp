@@ -19,6 +19,9 @@ public:
 
 private:
     Map* map_;
+    void selectCargo();
+    void ensureSelection();
+    void storeResponder();
 };
 
 class Sell : public ICommand {

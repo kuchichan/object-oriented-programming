@@ -1,16 +1,17 @@
 #include "store.hpp"
+#include "locators.hpp"
 
 #include <algorithm>
 #include <iomanip>
 #include <ostream>
 #include <random>
 
-Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock, Time* time)
-    : stock_(stock), time_(time) {
-    time_->addObserver(this);
+Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock)
+    : stock_(stock) {
+  TimeServiceLocator::getTime()->addObserver(this);
 }
 Store::~Store() {
-    time_->removeObserver(this);
+  TimeServiceLocator::getTime()->removeObserver(this);
 }
 
 Store::Response Store::buy(Cargo* cargo, Player* player) {
