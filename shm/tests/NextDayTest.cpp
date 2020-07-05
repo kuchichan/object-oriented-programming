@@ -21,7 +21,7 @@ public:
     Ship ship;
 
     NextDayTest()
-        : player(100, 50),
+        : player(100),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
