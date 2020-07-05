@@ -20,7 +20,7 @@ public:
     Ship ship;
     NextDayTest()
         : time(),
-          player(100, 50),
+          player(100),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
@@ -28,7 +28,7 @@ public:
                       {std::make_shared<Item>(item)},
                       {std::make_shared<Fruit>(fruit)}}),
           store(test_stock, &time),
-          ship(30, 10, 1, &player) { }
+          ship(30, 10, 1, &player) {}
 };
 
 TEST_F(NextDayTest, NextDayShouldDoNothingToAlcohol) {
