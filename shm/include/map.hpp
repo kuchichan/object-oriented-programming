@@ -12,6 +12,7 @@ public:
     const std::vector<Island>& getAllIslands() { return Islands_; };
     void travel(Island* destination);
     size_t getDistanceToIsland(Island* destination);
+    Island* getCurrentPosition() { return currentPosition_; };
 
 
 private:

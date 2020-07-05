@@ -40,9 +40,8 @@ size_t Map::getDistanceToIsland(Island* destination) {
 }
 
 void Map::travel(Island* destination) {
-    size_t distance = getDistanceToIsland(destination);
-    for (int i = 0; i < distance; ++i) {
-        TimeServiceLocator::getTime()->operator++();
+    if (destination == currentPosition_) {
+        return;
     }
     currentPosition_ = destination;
 }
