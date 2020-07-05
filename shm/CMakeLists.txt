@@ -51,13 +51,14 @@ set(SOURCE
     src/store.cpp
     src/time.cpp
     src/game.cpp
-    src/commands.cpp
     src/locators.cpp
+    src/Travel.cpp
 )
 
 set (TEST_FILES
   tests/AlcoholTest.cpp
   tests/NextDayTest.cpp
+  tests/TravelTests.cpp
 )
 
 include_directories(include)
