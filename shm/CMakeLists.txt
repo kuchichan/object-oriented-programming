@@ -49,6 +49,7 @@ set(SOURCE
     src/ship.cpp
     src/store.cpp
     src/time.cpp
+    src/TimeServiceLocator.cpp
 )
 
 set (TEST_FILES

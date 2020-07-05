@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "TimeServiceLocator.hpp"
+
 constexpr size_t startTime = 1;
 
 Time::Time() : elapsedTime_(startTime) {}

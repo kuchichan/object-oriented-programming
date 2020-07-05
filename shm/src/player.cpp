@@ -1,8 +1,20 @@
 #include "player.hpp"
 
 
+constexpr char* shipName = "ship";
+constexpr int shipCapacity = 100;
+constexpr int shipMaxCrew = 30;
+constexpr int shipSpeed = 10;
+constexpr size_t shipId = 1;
+
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
     : ship_(std::move(ship)), money_(money), availableSpace_(availableSpace) {}
+
+Player::Player(size_t money, size_t availableSpace)
+: money_(money),
+availableSpace_(availableSpace) {
+    ship_ = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, shipName, shipId, this);
+}
 
 Cargo* Player::getCargo(size_t index) const {
     if (index < (ship_->getCargo().size())) {
