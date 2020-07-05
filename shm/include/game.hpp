@@ -1,10 +1,11 @@
 #pragma once
 
-#include "commands.hpp"
+#include "Command.hpp"
 #include "map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
+#include "Travel.hpp"
 
 #include <memory>
 
@@ -37,7 +38,4 @@ private:
     std::unique_ptr<Time> time_;
     std::unique_ptr<Player> player_;
     std::unique_ptr<Travel> travel_command_;
-    std::unique_ptr<Buy> buy_command_;
-    std::unique_ptr<Sell> sell_command_;
-    std::unique_ptr<PrintCargo> print_cargo_command_;
 };
