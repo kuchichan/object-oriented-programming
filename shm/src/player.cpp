@@ -12,10 +12,10 @@ Player::Player(std::unique_ptr<Ship> ship, size_t money)
     availableSpace_ = ship_->getCapacity();
 }
 
-Player::Player(size_t money, size_t availableSpace)
-: money_(money),
-availableSpace_(availableSpace) {
+Player::Player(size_t money)
+: money_(money) {
     ship_ = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, shipName, shipId, this);
+    availableSpace_ = ship_->getCapacity();
 }
 
 Cargo* Player::getCargo(size_t index) const {
