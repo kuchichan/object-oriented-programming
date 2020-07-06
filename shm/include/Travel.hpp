@@ -17,9 +17,14 @@ public:
 private:
     Map* map_;
     Time* time_;
+    int coordinate_x;
+    int coordinate_y;
 
     void displayPossibleOptions();
-    void enterCoordinatesAgain(int & x, int & y);
-    size_t countDaysOfTravel(Player* player, int coordinate_x, int coordinate_y);
+    void displayCurrentPosition();
+    void enterCoordinates();
+    size_t countDaysOfTravel(size_t speed);
     void incrementDays(size_t count);
+    bool isChosenIslandValid();
+    void changeCurrentPositionToChosenIsland();
 };
