@@ -7,20 +7,19 @@
 #include "player.hpp"
 
 Travel::Travel(Map* map, Time* time)
-    : map_(map), time_(time) {}
+    : map_(map), time_(time), coordinate_x(-1), coordinate_y(-1) {}
 
 void Travel::execute(Player* player) {
-    std::cout << "Your current position: " << map_->getCurrentPosition()->getCoordinates() << "\n";
+    displayCurrentPosition();
     displayPossibleOptions();
-    std::cout << "Enter the coordinates of the chosen island: ";
-    int coordinate_x = 0, coordinate_y = 0;
-    std::cin >> coordinate_x >> coordinate_y;
-    while (!map_->getIsland(Coordinates(coordinate_x, coordinate_y))) {
-        enterCoordinatesAgain(coordinate_x, coordinate_y);
+    enterCoordinates();
+    while (!isChosenIslandValid()) {
+        std::cout << "Chosen island is not valid!\n";
+        enterCoordinates();
     }
-    auto daysOfTravel = countDaysOfTravel(player, coordinate_x, coordinate_y);
+    auto daysOfTravel = countDaysOfTravel(player->getSpeed());
     incrementDays(daysOfTravel);
-    map_->travel(map_->getIsland(Coordinates(coordinate_x, coordinate_y)));
+    changeCurrentPositionToChosenIsland();
     std::cout << "Time of travel: " << daysOfTravel << "\n";
 }
 
@@ -33,10 +32,13 @@ void Travel::displayPossibleOptions() {
     }
 }
 
-void Travel::enterCoordinatesAgain(int& x, int& y) {
-    std::cout << "Wrong coordinates!\n";
-    std::cout << "Enter new coordinates: ";
-    std::cin >> x >> y;
+void Travel::enterCoordinates() {
+    std::cout << "Enter the coordinates of the chosen island: ";
+    std::cin >> coordinate_x >> coordinate_y;
+}
+
+void Travel::displayCurrentPosition() {
+    std::cout << "Your current position: " << map_->getCurrentPosition()->getCoordinates() << "\n";
 }
 
 void Travel::incrementDays(size_t count) {
@@ -45,6 +47,17 @@ void Travel::incrementDays(size_t count) {
     }
 }
 
-size_t Travel::countDaysOfTravel(Player* player, int coordinate_x, int coordinate_y) {
-    return map_->getDistanceToIsland(map_->getIsland(Coordinates(coordinate_x, coordinate_y))) / player->getSpeed();
+size_t Travel::countDaysOfTravel(size_t speed) {
+    return map_->getDistanceToIsland(map_->getIsland(Coordinates(coordinate_x, coordinate_y))) / speed;
+}
+
+bool Travel::isChosenIslandValid() {
+    if (!map_->getIsland(Coordinates(coordinate_x, coordinate_y))) {
+        return false;
+    }
+    return true;
+}
+
+void Travel::changeCurrentPositionToChosenIsland() {
+    map_->travel(map_->getIsland(Coordinates(coordinate_x, coordinate_y)));
 }
