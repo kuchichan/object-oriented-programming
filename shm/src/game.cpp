@@ -12,8 +12,7 @@ Game::Game(size_t money, size_t days, size_t final_goal)
                                        money);
     buy_command_ = std::make_unique<Buy>(map_.get());
     sell_command_ = std::make_unique<Sell>(map_.get());
-    travel_command_ =
-        std::make_unique<Travel>(map_.get(), TimeServiceLocator::getTime());
+    travel_command_ = std::make_unique<Travel>(map_.get(), TimeServiceLocator::getTime());
     print_cargo_command_ = std::make_unique<PrintCargo>();
 }
 
