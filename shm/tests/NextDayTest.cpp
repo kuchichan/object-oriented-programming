@@ -1,6 +1,7 @@
 #include "alcohol.hpp"
 #include "fruit.hpp"
 #include "gtest/gtest.h"
+#include "island.hpp"
 #include "item.hpp"
 #include "locators.hpp"
 #include "player.hpp"
@@ -46,7 +47,9 @@ TEST_F(NextDayTest, NextDayShouldSpoilFruit) {
 }
 
 TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
-    TimeServiceLocator::provide(std::make_shared<Time>().get());
+    auto time = std::make_shared<Time>();
+    TimeServiceLocator::provide(time.get());
+
     auto store = Store(test_stock);
     auto original_alco_amount = test_stock[0]->getAmount();
     auto original_item_amount = test_stock[1]->getAmount();
@@ -61,11 +64,24 @@ TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
 }
 
 TEST(TestWithoutFixtureTemp, NextDayShouldPayCrew) {
-    TimeServiceLocator::provide(std::make_shared<Time>().get());
+    auto time = std::make_shared<Time>();
+    TimeServiceLocator::provide(time.get());
     Player player = Player(std::make_unique<Ship>(30, 10, 1, &player), 100);
     auto player_money = player.getMoney();
     Ship ship = Ship(30, 10, 1, &player);
     ship += 5;
     ship.nextDay();
     ASSERT_EQ(player_money - 5, player.getMoney());
+}
+
+TEST(TestWithoutFixtureTemp, StoreShouldBeGeneratedWithNoArgConstructor) {
+    auto time = std::make_shared<Time>();
+    TimeServiceLocator::provide(time.get());
+
+    Store testStore = Store();
+    Island testIsland = Island(20, 20);
+    auto store = testIsland.getStore()->getCargo(0);
+    // TODO:  Can toggle due to randomness - We got to find out method, how to test it
+    // wisely
+    ASSERT_NE(store, nullptr);
 }
