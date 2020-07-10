@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "locators.hpp"
 
 const std::unique_ptr<Time> defaultTime = std::make_unique<Time>();
