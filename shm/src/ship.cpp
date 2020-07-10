@@ -62,7 +62,7 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
     **result += cargo->getAmount();
 }
 
-void Ship::unload(Cargo* cargo) {
+void Ship::unload(Cargo* cargo, size_t amount) {
     auto thing = std::find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& el) {
         return (el->getName() == cargo->getName() &&
                 el->getBasePrice() == cargo->getBasePrice() &&
@@ -72,11 +72,11 @@ void Ship::unload(Cargo* cargo) {
         return;
     }
 
-    if ((*thing)->getAmount() <= cargo->getAmount()) {
+    if ((*thing)->getAmount() <= amount) {
         cargo_.erase(thing);
         return;
     }
-    **thing -= cargo->getAmount();
+    **thing -= amount;
 }
 
 void Ship::nextDay() {

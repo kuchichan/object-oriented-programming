@@ -2,11 +2,14 @@
 #include <iostream>
 Buy::Buy(Map* map) : map_(map) {}
 
+void Buy::displayStore(std::shared_ptr<Store> store) {
+    std::cout << "\n" << *store.get() << "\n";
+}
+
 void Buy::execute(Player* player) {
     while (true) {
         auto store = map_->getCurrentPosition()->getStore();
-        std::cout << "\n" << *store.get() << "\n";
-
+	displayStore(store);
         size_t position{};
         size_t quantity{};
 
@@ -14,6 +17,7 @@ void Buy::execute(Player* player) {
             << "Please enter the position and amount of cargo you are interested in";
         std::cin >> position >> quantity;
         if (quantity == 0) {
+	  return;
         }
         Cargo* cargo = store->getCargo(position);
         if (!cargo) {
@@ -67,6 +71,7 @@ void Sell::execute(Player* player) {
                      "in Put zero amount if you want to quit";
         std::cin >> position >> quantity;
         if (quantity == 0) {
+	  return;
         }
         Cargo* cargo = store->getCargo(position);
         if (!cargo) {

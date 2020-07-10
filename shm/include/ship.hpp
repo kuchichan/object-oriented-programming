@@ -37,7 +37,7 @@ public:
     std::vector<std::shared_ptr<Cargo>>& getCargo() { return cargo_; };
 
     void load(std::shared_ptr<Cargo> cargo);
-    void unload(Cargo* cargo);
+    void unload(Cargo* cargo, size_t amount);
     // override from Observer
     void nextDay() override;
 

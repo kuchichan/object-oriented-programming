@@ -46,7 +46,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     load(std::shared_ptr<Cargo>(cargo), amount);
-    player->unloadShip(cargo);
+    player->unloadShip(cargo, amount);
     player->setMoney(player->getMoney() + cargo->getPrice());
 
     return Response::done;
@@ -98,17 +98,8 @@ void Store::nextDay() {
     }
 }
 
-void Store::generateRegularCargo() {
-    std::vector<std::shared_ptr<Cargo>> possibleRegularCargo{
-        std::make_shared<Alcohol>(Alcohol("Whisky", 0, 100, 47)),
-        std::make_shared<Alcohol>(Alcohol("Beer", 0, 12, 8)),
-        std::make_shared<Alcohol>(Alcohol("Wine", 0, 40, 47)),
-        std::make_shared<Fruit>(Fruit("Banana", 0, 5, 10)),
-        std::make_shared<Fruit>(Fruit("Orange", 0, 7, 7)),
-        std::make_shared<Fruit>(Fruit("Raspberry", 0, 30, 2)),
-        std::make_shared<Fruit>(Fruit("GoldenCucumber", 0, 70, 1)),
-    };
-
+void Store::randomizeRegularCargo(
+    const std::vector<std::shared_ptr<Cargo>>& possibleRegularCargo) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> initialAmount(0, 20);
@@ -119,15 +110,7 @@ void Store::generateRegularCargo() {
     }
 }
 
-void Store::generateItems() {
-    std::vector<std::shared_ptr<Cargo>> items{
-        std::make_shared<Item>(Item("MetalScrap", 10, 2, Item::Rarity::common)),
-        std::make_shared<Item>(Item("Sextant", 3, 120, Item::Rarity::rare)),
-        std::make_shared<Item>(Item("BlackPearl", 1, 400, Item::Rarity::epic)),
-        std::make_shared<Item>(Item("Kraken's eye", 1, 1000, Item::Rarity::legendary))
-
-    };
-
+void Store::randomizeItems(const std::vector<std::shared_ptr<Cargo>>& items) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> itemRarity(0, 100);
@@ -146,6 +129,31 @@ void Store::generateItems() {
     if (result > 98) {
         stock_.push_back(items[3]);
     }
+}
+
+void Store::generateRegularCargo() {
+    std::vector<std::shared_ptr<Cargo>> possibleRegularCargo{
+        std::make_shared<Alcohol>(Alcohol("Whisky", 0, 100, 47)),
+        std::make_shared<Alcohol>(Alcohol("Beer", 0, 12, 8)),
+        std::make_shared<Alcohol>(Alcohol("Wine", 0, 40, 47)),
+        std::make_shared<Fruit>(Fruit("Banana", 0, 5, 10)),
+        std::make_shared<Fruit>(Fruit("Orange", 0, 7, 7)),
+        std::make_shared<Fruit>(Fruit("Raspberry", 0, 30, 2)),
+        std::make_shared<Fruit>(Fruit("GoldenCucumber", 0, 70, 1)),
+    };
+    randomizeRegularCargo(possibleRegularCargo);
+}
+
+void Store::generateItems() {
+    std::vector<std::shared_ptr<Cargo>> items{
+        std::make_shared<Item>(Item("MetalScrap", 10, 2, Item::Rarity::common)),
+        std::make_shared<Item>(Item("Sextant", 3, 120, Item::Rarity::rare)),
+        std::make_shared<Item>(Item("BlackPearl", 1, 400, Item::Rarity::epic)),
+        std::make_shared<Item>(Item("Kraken's eye", 1, 1000, Item::Rarity::legendary))
+
+    };
+
+    randomizeItems(items);
 }
 
 Cargo* Store::getCargo(const size_t position) {

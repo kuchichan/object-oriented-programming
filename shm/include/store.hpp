@@ -10,7 +10,7 @@
 class Store : public Observer {
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
-    explicit Store();
+    Store();
     Store(const std::vector<std::shared_ptr<Cargo>>& stock);
 
     // override from Observer
@@ -28,6 +28,10 @@ private:
     void load(std::shared_ptr<Cargo> cargo, size_t amount);
     void unload(Cargo* cargo, size_t amount);
     std::vector<std::shared_ptr<Cargo>>::iterator findStock(Cargo* cargo);
+    void randomizeRegularCargo(
+        const std::vector<std::shared_ptr<Cargo>>& possibleRegularCargo);
+    void randomizeItems(const std::vector<std::shared_ptr<Cargo>>& items);
+
     void generateRegularCargo();
     void generateItems();
 };
