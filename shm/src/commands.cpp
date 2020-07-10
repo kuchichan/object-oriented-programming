@@ -2,6 +2,7 @@
 #include <iostream>
 Buy::Buy(Map* map) : map_(map) {}
 
+
 void Buy::displayStore(std::shared_ptr<Store> store) {
     std::cout << "\n" << *store.get() << "\n";
 }
@@ -10,6 +11,7 @@ void Buy::execute(Player* player) {
     while (true) {
         auto store = map_->getCurrentPosition()->getStore();
 	displayStore(store);
+
         size_t position{};
         size_t quantity{};
 

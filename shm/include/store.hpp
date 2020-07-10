@@ -31,7 +31,6 @@ private:
     void randomizeRegularCargo(
         const std::vector<std::shared_ptr<Cargo>>& possibleRegularCargo);
     void randomizeItems(const std::vector<std::shared_ptr<Cargo>>& items);
-
     void generateRegularCargo();
     void generateItems();
 };
