@@ -11,18 +11,24 @@
 
 class NextDayTest : public ::testing::Test {
 public:
+    Player player;
     Alcohol alco;
     Item item;
     Fruit fruit;
     std::vector<std::shared_ptr<Cargo>> test_stock;
+    Store store;
+    Ship ship;
 
     NextDayTest()
-        : alco("alco", 10, 100, 40),
+        : player(std::make_unique<Ship>(30, 10, 1, &player), 100),
+          alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
           test_stock({{std::make_shared<Alcohol>(alco)},
                       {std::make_shared<Item>(item)},
-                      {std::make_shared<Fruit>(fruit)}}) {}
+                      {std::make_shared<Fruit>(fruit)}}),
+          store(test_stock),
+          ship(30, 10, 1, &player) {}
 };
 
 TEST_F(NextDayTest, NextDayShouldDoNothingToAlcohol) {
@@ -47,10 +53,6 @@ TEST_F(NextDayTest, NextDayShouldSpoilFruit) {
 }
 
 TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
-    auto time = std::make_shared<Time>();
-    TimeServiceLocator::provide(time.get());
-
-    auto store = Store(test_stock);
     auto original_alco_amount = test_stock[0]->getAmount();
     auto original_item_amount = test_stock[1]->getAmount();
     auto original_fruit_amount = test_stock[2]->getAmount();
@@ -63,10 +65,7 @@ TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
     ASSERT_NE(original_fruit_amount, test_stock[2]->getAmount());
 }
 
-TEST(TestWithoutFixtureTemp, NextDayShouldPayCrew) {
-    auto time = std::make_shared<Time>();
-    TimeServiceLocator::provide(time.get());
-    Player player = Player(std::make_unique<Ship>(30, 10, 1, &player), 100);
+TEST_F(NextDayTest, NextDayShouldPayCrew) {
     auto player_money = player.getMoney();
     Ship ship = Ship(30, 10, 1, &player);
     ship += 5;

@@ -8,5 +8,5 @@ public:
     static void provide(Time* time);
 
 private:
-    inline static Time* time_ = nullptr;
+    static Time* time_;
 };
