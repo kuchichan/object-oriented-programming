@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "TimeServiceLocator.hpp"
+#include "locators.hpp"
 #include "map.hpp"
 #include "player.hpp"
 

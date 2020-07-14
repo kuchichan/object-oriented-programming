@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Command.hpp"
 #include "map.hpp"
-#include "TimeServiceLocator.hpp"
+#include "locators.hpp"
 #include "Travel.hpp"
 #include "player.hpp"
 
