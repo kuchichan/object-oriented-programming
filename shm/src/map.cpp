@@ -3,9 +3,6 @@
 #include <algorithm>
 #include <random>
 
-#include "TimeServiceLocator.hpp"
-#include "time.hpp"
-
 Map::Map() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -34,9 +31,9 @@ Island* Map::getIsland(const Coordinates& coordinate) {
 }
 
 size_t Map::getDistanceToIsland(Island* destination) {
-    destination->getCoordinates();
-    currentPosition_->getCoordinates();
-    return Coordinates::distance(destination->getCoordinates(), currentPosition_->getCoordinates());
+    auto destination_coordinates = destination->getCoordinates();
+    auto current_coordinates = currentPosition_->getCoordinates();
+    return Coordinates::distance(destination_coordinates, current_coordinates);
 }
 
 void Map::travel(Island* destination) {
