@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Command.hpp"
-#include "TimeServiceLocator.hpp"
+#include "locators.hpp"
 #include "Travel.hpp"
 #include "alcohol.hpp"
 #include "cargo.hpp"

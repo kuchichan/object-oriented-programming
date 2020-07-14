@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <random>
 
-#include "TimeServiceLocator.hpp"
+#include "locators.hpp"
 #include "time.hpp"
 
 Map::Map() {

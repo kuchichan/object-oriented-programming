@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "TimeServiceLocator.hpp"
+#include "locators.hpp"
 
 constexpr size_t startTime = 1;
 
