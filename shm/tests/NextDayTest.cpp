@@ -1,3 +1,4 @@
+// #include "TimeServiceLocator.hpp"
 #include "alcohol.hpp"
 #include "fruit.hpp"
 #include "gtest/gtest.h"
@@ -20,7 +21,7 @@ public:
     Ship ship;
 
     NextDayTest()
-        : player(std::make_unique<Ship>(30, 10, 1, &player), 100),
+        : player(100),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
