@@ -34,19 +34,6 @@ private:
     Map* map_;
 };
 
-class Travel : public ICommand {
-public:
-    Travel(Map* map, Time* time);
-
-    // Overrides from ICommand
-    ~Travel() override = default;
-    void execute(Player* player) override;
-
-private:
-    Map* map_;
-    Time* time_;
-};
-
 class PrintCargo : public ICommand {
 public:
     // Overrides from ICommand

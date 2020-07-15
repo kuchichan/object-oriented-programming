@@ -53,6 +53,7 @@ set(SOURCE
     src/game.cpp
     src/locators.cpp
     src/Travel.cpp
+    src/print_cargo.cpp
 )
 
 set (TEST_FILES

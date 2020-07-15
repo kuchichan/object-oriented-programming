@@ -1,8 +1,9 @@
+#include <iostream>
+
+#include "Travel.hpp"
 #include "game.hpp"
 #include "locators.hpp"
 #include "time.hpp"
-
-#include <iostream>
 
 Game::Game(size_t money, size_t days, size_t final_goal)
     : money_(money),

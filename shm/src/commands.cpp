@@ -1,7 +1,9 @@
-#include "commands.hpp"
-
 #include <iomanip>
 #include <iostream>
+
+#include "Sell.hpp"
+#include "buy.hpp"
+#include "map.hpp"
 
 Buy::Buy(Map* map) : map_(map) {}
 
@@ -111,27 +113,5 @@ void Sell::execute(Player* player) {
             std::cout << "You do  not have this cargo in given amount!!";
             break;
         }
-    }
-}
-
-Travel::Travel(Map* map, Time* time) : map_(map), time_(time) {}
-void Travel::execute(Player* player) {}
-
-void PrintCargo::execute(Player* player) {
-    size_t cargoIndex = 0;
-    std::string dash(42, '-');
-    auto cargo = player->getCargo(cargoIndex);
-    
-    std::cout << std::setw(14) << "Name |" << std::setw(14) << " Amount |"
-              << std::setw(15) << " Baseprice |\n"
-              << dash << '\n';
-
-    while (cargo) {
-        std::cout << std::setw(12) << cargo->getName() << " |" << std::setw(12)
-                  << cargo->getAmount() << " |" << std::setw(12) << cargo->getBasePrice()
-                  << " |\n";
-
-        cargoIndex++;
-        cargo = player->getCargo(cargoIndex);
     }
 }

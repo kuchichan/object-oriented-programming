@@ -1,12 +1,13 @@
 #pragma once
 
+#include <memory>
+
+#include "Travel.hpp"
 #include "commands.hpp"
 #include "map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
-
-#include <memory>
 
 class Game {
 public:
