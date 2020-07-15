@@ -2,7 +2,6 @@
 
 #include "game.hpp"
 #include "locators.hpp"
-#include "time.hpp"
 
 Game::Game(size_t money, size_t days, size_t final_goal)
     : money_(money),
