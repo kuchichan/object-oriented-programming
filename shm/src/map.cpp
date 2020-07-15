@@ -1,8 +1,10 @@
 #include "map.hpp"
 
 #include <algorithm>
-
 #include <random>
+
+#include "locators.hpp"
+#include "time.hpp"
 
 Map::Map() {
     std::random_device rd;
@@ -17,11 +19,29 @@ Map::Map() {
         }
         Islands_.push_back(temp);
     }
+    currentPosition_ = &Islands_[0];
 }
+
 Island* Map::getIsland(const Coordinates& coordinate) {
     auto result =
         std::find_if(Islands_.begin(), Islands_.end(), [coordinate](const Island& islnd) {
             return islnd.getCoordinates() == coordinate;
         });
+    if (result == Islands_.end()) {
+        return nullptr;
+    }
     return &(*result);
+}
+
+size_t Map::getDistanceToIsland(Island* destination) {
+    destination->getCoordinates();
+    currentPosition_->getCoordinates();
+    return Coordinates::distance(destination->getCoordinates(), currentPosition_->getCoordinates());
+}
+
+void Map::travel(Island* destination) {
+    if (destination == currentPosition_) {
+        return;
+    }
+    currentPosition_ = destination;
 }

@@ -33,6 +33,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 # later. Otherwise we have to add them here ourselves.
 if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
+  include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
 project(TradeSimulator)
@@ -50,12 +51,14 @@ set(SOURCE
     src/store.cpp
     src/time.cpp
     src/game.cpp
-    src/commands.cpp
+    src/locators.cpp
+    src/Travel.cpp
 )
 
 set (TEST_FILES
   tests/AlcoholTest.cpp
   tests/NextDayTest.cpp
+  tests/TravelTests.cpp
 )
 
 include_directories(include)
@@ -66,8 +69,7 @@ add_executable(${PROJECT_NAME}-ut ${TEST_FILES})
 
 add_compile_options(${PROJECT_NAME} -Wall -Wextra -Wconversion -pedantic -Werror)
 
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
-target_link_libraries(${PROJECT_NAME}-ut lib)
-target_link_libraries(${PROJECT_NAME} lib)
+target_link_libraries(${PROJECT_NAME}-ut PRIVATE gtest_main lib -fsanitize=undefined)
+target_link_libraries(${PROJECT_NAME} PRIVATE lib -fsanitize=undefined)
 
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)

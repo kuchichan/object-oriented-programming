@@ -7,6 +7,7 @@
 class Player : public Ship::Delegate {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money);
+    Player(size_t money);
 
     size_t getAvailableSpace() const { return availableSpace_; }
     size_t getMoney() const { return money_; }
@@ -17,7 +18,7 @@ public:
     void payCrew(size_t money) override;
 
     void loadShip(std::shared_ptr<Cargo> cargo);
-    void unloadShip(Cargo* cargo);
+  void unloadShip(Cargo* cargo, size_t amount);
 
 private:
     std::unique_ptr<Ship> ship_;

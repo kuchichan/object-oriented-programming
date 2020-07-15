@@ -1,9 +1,18 @@
 #include "player.hpp"
 
-#include <limits>
+
+constexpr char* shipName = "ship";
+constexpr int shipCapacity = 100;
+constexpr int shipMaxCrew = 30;
+constexpr int shipSpeed = 10;
+constexpr size_t shipId = 1;
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money)
-    : ship_(std::move(ship)), money_(money) {
+    : ship_(std::move(ship)), money_(money), availableSpace_(ship->getCapacity()) {}
+
+Player::Player(size_t money)
+: money_(money) {
+    ship_ = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, shipName, shipId, this);
     availableSpace_ = ship_->getCapacity();
 }
 
@@ -20,8 +29,8 @@ void Player::loadShip(std::shared_ptr<Cargo> cargo) {
     countAvailableSpace();
 }
 
-void Player::unloadShip(Cargo* cargo) {
-    ship_->unload(cargo);
+void Player::unloadShip(Cargo* cargo, size_t amount) {
+  ship_->unload(cargo, amount);
     countAvailableSpace();
 }
 
@@ -40,5 +49,5 @@ void Player::countAvailableSpace() {
 }
 
 void Player::payCrew(size_t money) {
-    (money_ < money) ? money_ = std::numeric_limits<size_t>::max() : money_ -= money;
+    (money_ < money) ? money_ = 0 : money_ -= money;
 }
