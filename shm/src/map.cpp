@@ -19,7 +19,7 @@ Map::Map() {
         }
         Islands_.push_back(temp);
     }
-    currentPosition_ = &(*std::next(Islands_.begin()));
+    currentPosition_ = &Islands_[0];
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {
