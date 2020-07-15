@@ -1,4 +1,4 @@
-#include "Command.hpp"
+#include "command.hpp"
 #include "Travel.hpp"
 #include "gtest/gtest.h"
 #include "locators.hpp"
