@@ -74,9 +74,6 @@ TEST_F(NextDayTest, NextDayShouldPayCrew) {
 }
 
 TEST(TestWithoutFixtureTemp, StoreShouldBeGeneratedWithNoArgConstructor) {
-    auto time = std::make_shared<Time>();
-    TimeServiceLocator::provide(time.get());
-
     Store testStore = Store();
     Island testIsland = Island(20, 20);
     auto store = testIsland.getStore()->getCargo(0);
