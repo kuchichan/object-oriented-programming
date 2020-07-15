@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Sell.hpp"
+#include "sell.hpp"
 #include "map.hpp"
 
 Sell::Sell(Map* map) : map_(map) {}

@@ -1,9 +1,9 @@
 #include "command.hpp"
-#include "Travel.hpp"
 #include "gtest/gtest.h"
 #include "locators.hpp"
 #include "map.hpp"
 #include "player.hpp"
+#include "travel.hpp"
 
 class TravelCommandTest : public ::testing::Test {
 public:
