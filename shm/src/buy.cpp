@@ -1,21 +1,24 @@
 #include <iostream>
 
-#include "Sell.hpp"
+#include "buy.hpp"
 #include "map.hpp"
 
-Sell::Sell(Map* map) : map_(map) {}
+Buy::Buy(Map* map) : map_(map) {}
 
-void Sell::execute(Player* player) {
-    // Will be good to print player's cargo somehow.
+void Buy::displayStore(std::shared_ptr<Store> store) {
+    std::cout << "\n" << *store.get() << "\n";
+}
+
+void Buy::execute(Player* player) {
     while (true) {
         auto store = map_->getCurrentPosition()->getStore();
-        std::cout << "\n" << *store.get() << "\n";
+        displayStore(store);
 
         size_t position{};
         size_t quantity{};
 
-        std::cout << "Please enter the position and amount of cargo you are interested "
-                     "in Put zero amount if you want to quit";
+        std::cout
+            << "Please enter the position and amount of cargo you are interested in";
         std::cin >> position >> quantity;
         if (quantity == 0) {
             return;
@@ -29,7 +32,7 @@ void Sell::execute(Player* player) {
         char answer = 'y';
         while (true) {
             std::cout << "The price is " << cargo->getPrice() * quantity
-                      << "Are you sure want to sell it? [y/ other key]";
+                      << "Are you sure want to buy it? [y/ other key]";
             std::cin >> answer;
             if (std::tolower(answer) == 'y') {
                 break;
@@ -38,9 +41,9 @@ void Sell::execute(Player* player) {
             }
         }
 
-        switch (store->sell(cargo, quantity, player)) {
+        switch (store->buy(cargo, quantity, player)) {
         case Store::Response::done:
-            std::cout << "Good one! You have sell " << cargo << " in quantity "
+            std::cout << "Good one! You have bought " << cargo << " in quantity "
                       << quantity << "\n";
             return;
 
@@ -51,7 +54,7 @@ void Sell::execute(Player* player) {
             std::cout << "You do not have enough space!";
             break;
         case Store::Response::lack_of_cargo:
-            std::cout << "You do  not have this cargo in given amount!!";
+            std::cout << "Store does not have as much cargo as you need!";
             break;
         }
     }

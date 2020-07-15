@@ -3,6 +3,7 @@
 #include "commands.hpp"
 #include "player.cpp"
 #include "ship.hpp"
+#include "PrintCargo.hpp"
 
 int main() {
     auto alco1 = std::make_shared<Alcohol>(Alcohol("Whisky", 0, 100, 47));

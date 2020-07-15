@@ -54,6 +54,7 @@ set(SOURCE
     src/locators.cpp
     src/Travel.cpp
     src/print_cargo.cpp
+    src/buy.cpp
 )
 
 set (TEST_FILES

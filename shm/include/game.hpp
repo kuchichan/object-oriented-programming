@@ -2,7 +2,9 @@
 
 #include <memory>
 
+#include "PrintCargo.hpp"
 #include "Travel.hpp"
+#include "buy.hpp"
 #include "commands.hpp"
 #include "map.hpp"
 #include "player.hpp"

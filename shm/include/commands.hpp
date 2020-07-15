@@ -9,19 +9,6 @@ public:
     virtual void execute(Player* player) = 0;
 };
 
-class Buy : public ICommand {
-public:
-    Buy(Map* map);
-
-    // Overrides from ICommand
-    ~Buy() override = default;
-    void execute(Player* player) override;
-    void displayStore(std::shared_ptr<Store> store);
-
-private:
-    Map* map_;
-};
-
 class Sell : public ICommand {
 public:
     Sell(Map* map);
@@ -32,11 +19,4 @@ public:
 
 private:
     Map* map_;
-};
-
-class PrintCargo : public ICommand {
-public:
-    // Overrides from ICommand
-    ~PrintCargo() override = default;
-    void execute(Player* player) override;
 };
