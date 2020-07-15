@@ -1,7 +1,9 @@
 #include "commands.hpp"
-#include <iostream>
-Buy::Buy(Map* map) : map_(map) {}
 
+#include <iomanip>
+#include <iostream>
+
+Buy::Buy(Map* map) : map_(map) {}
 
 void Buy::displayStore(std::shared_ptr<Store> store) {
     std::cout << "\n" << *store.get() << "\n";
@@ -10,7 +12,7 @@ void Buy::displayStore(std::shared_ptr<Store> store) {
 void Buy::execute(Player* player) {
     while (true) {
         auto store = map_->getCurrentPosition()->getStore();
-	displayStore(store);
+        displayStore(store);
 
         size_t position{};
         size_t quantity{};
@@ -19,7 +21,7 @@ void Buy::execute(Player* player) {
             << "Please enter the position and amount of cargo you are interested in";
         std::cin >> position >> quantity;
         if (quantity == 0) {
-	  return;
+            return;
         }
         Cargo* cargo = store->getCargo(position);
         if (!cargo) {
@@ -73,7 +75,7 @@ void Sell::execute(Player* player) {
                      "in Put zero amount if you want to quit";
         std::cin >> position >> quantity;
         if (quantity == 0) {
-	  return;
+            return;
         }
         Cargo* cargo = store->getCargo(position);
         if (!cargo) {
@@ -113,3 +115,23 @@ void Sell::execute(Player* player) {
 }
 
 Travel::Travel(Map* map, Time* time) : map_(map), time_(time) {}
+void Travel::execute(Player* player) {}
+
+void PrintCargo::execute(Player* player) {
+    size_t cargoIndex = 0;
+    std::string dash(42, '-');
+    auto cargo = player->getCargo(cargoIndex);
+    
+    std::cout << std::setw(14) << "Name |" << std::setw(14) << " Amount |"
+              << std::setw(15) << " Baseprice |\n"
+              << dash << '\n';
+
+    while (cargo) {
+        std::cout << std::setw(12) << cargo->getName() << " |" << std::setw(12)
+                  << cargo->getAmount() << " |" << std::setw(12) << cargo->getBasePrice()
+                  << " |\n";
+
+        cargoIndex++;
+        cargo = player->getCargo(cargoIndex);
+    }
+}
