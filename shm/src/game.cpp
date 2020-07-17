@@ -31,7 +31,7 @@ void Game::startGame() {
             size_t action;
             std::cin >> action;
             if (action == 0) {
-                std::cout << "Some exiting message";
+                std::cout << "You are exiting the game. Goodbye!\n";
                 return;
             }
             makeAction(static_cast<Action>(action));
