@@ -19,22 +19,21 @@ Game::Game(size_t money, size_t days, size_t final_goal)
 
 void Game::startGame() {
     while (days_ > time_->getElapsedTime()) {
+        printMenu();
+        printOptions();
+        size_t action;
+        std::cin >> action;
+        if (action == 0) {
+            std::cout << "You are exiting the game. Goodbye!\n";
+            return;
+        }
+        makeAction(static_cast<Action>(action));
         if (checkWinCondition()) {
             printWinScreen();
             return;
         } else if (checkLoseCondition()) {
             printLooseScreen();
             return;
-        } else {
-            printMenu();
-            printOptions();
-            size_t action;
-            std::cin >> action;
-            if (action == 0) {
-                std::cout << "You are exiting the game. Goodbye!\n";
-                return;
-            }
-            makeAction(static_cast<Action>(action));
         }
     }
 }
